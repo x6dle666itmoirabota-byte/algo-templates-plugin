@@ -1,0 +1,135 @@
+{
+  "Merge Sort": {
+    "prefix": "algo_merge_sort",
+    "body": [
+      "void merge(std::vector<int>& arr, int l, int m, int r) {",
+      "    int n1 = m - l + 1;",
+      "    int n2 = r - m;",
+      "    std::vector<int> L(n1), R(n2);",
+      "    for (int i = 0; i < n1; i++) L[i] = arr[l + i];",
+      "    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];",
+      "    int i = 0, j = 0, k = l;",
+      "    while (i < n1 && j < n2) {",
+      "        if (L[i] <= R[j]) arr[k++] = L[i++];",
+      "        else arr[k++] = R[j++];",
+      "    }",
+      "    while (i < n1) arr[k++] = L[i++];",
+      "    while (j < n2) arr[k++] = R[j++];",
+      "}",
+      "",
+      "void mergeSort(std::vector<int>& arr, int l, int r) {",
+      "    if (l >= r) return;",
+      "    int m = l + (r - l) / 2;",
+      "    mergeSort(arr, l, m);",
+      "    mergeSort(arr, m + 1, r);",
+      "    merge(arr, l, m, r);",
+      "}"
+    ],
+    "description": "Сортировка слиянием (Merge Sort)"
+  },
+  "Binary Search (Classic)": {
+    "prefix": "algo_binary_search",
+    "body": [
+      "int binarySearch(const std::vector<int>& arr, int target) {",
+      "    int left = 0, right = arr.size() - 1;",
+      "    while (left <= right) {",
+      "        int mid = left + (right - left) / 2;",
+      "        if (arr[mid] == target) return mid; // Элемент найден",
+      "        if (arr[mid] < target) left = mid + 1;",
+      "        else right = mid - 1;",
+      "    }",
+      "    return -1; // Элемент не найден",
+      "}"
+    ],
+    "description": "Классический бинарный поиск"
+  },
+  "Quick Sort": {
+    "prefix": "algo_quick_sort",
+    "body": [
+      "int partition(std::vector<int>& arr, int low, int high) {",
+      "    int pivot = arr[high];",
+      "    int i = (low - 1);",
+      "    for (int j = low; j <= high - 1; j++) {",
+      "        if (arr[j] < pivot) {",
+      "            i++;",
+      "            std::swap(arr[i], arr[j]);",
+      "        }",
+      "    }",
+      "    std::swap(arr[i + 1], arr[high]);",
+      "    return (i + 1);",
+      "}",
+      "",
+      "void quickSort(std::vector<int>& arr, int low, int high) {",
+      "    if (low < high) {",
+      "        int pi = partition(arr, low, high);",
+      "        quickSort(arr, low, pi - 1);",
+      "        quickSort(arr, pi + 1, high);",
+      "    }",
+      "}"
+    ],
+    "description": "Быстрая сортировка (Quick Sort)"
+  },
+  "Insertion Sort": {
+    "prefix": "algo_insertion_sort",
+    "body": [
+      "void insertionSort(std::vector<int>& arr) {",
+      "    int n = arr.size();",
+      "    for (int i = 1; i < n; i++) {",
+      "        int key = arr[i];",
+      "        int j = i - 1;",
+      "        while (j >= 0 && arr[j] > key) {",
+      "            arr[j + 1] = arr[j];",
+      "            j = j - 1;",
+      "        }",
+      "        arr[j + 1] = key;",
+      "    }",
+      "}"
+    ],
+    "description": "Сортировка вставками (Insertion Sort)"
+  },
+  "Heap Sort": {
+    "prefix": "algo_heap_sort",
+    "body": [
+      "void heapify(std::vector<int>& arr, int n, int i) {",
+      "    int largest = i;",
+      "    int l = 2 * i + 1;",
+      "    int r = 2 * i + 2;",
+      "    if (l < n && arr[l] > arr[largest]) largest = l;",
+      "    if (r < n && arr[r] > arr[largest]) largest = r;",
+      "    if (largest != i) {",
+      "        std::swap(arr[i], arr[largest]);",
+      "        heapify(arr, n, largest);",
+      "    }",
+      "}",
+      "",
+      "void heapSort(std::vector<int>& arr) {",
+      "    int n = arr.size();",
+      "    for (int i = n / 2 - 1; i >= 0; i--) heapify(arr, n, i);",
+      "    for (int i = n - 1; i > 0; i--) {",
+      "        std::swap(arr[0], arr[i]);",
+      "        heapify(arr, i, 0);",
+      "    }",
+      "}"
+    ],
+    "description": "Пирамидальная сортировка (Heap Sort)"
+  },
+  "Counting Sort": {
+    "prefix": "algo_counting_sort",
+    "body": [
+      "// Применимо для неотрицательных целых чисел",
+      "void countingSort(std::vector<int>& arr) {",
+      "    if (arr.empty()) return;",
+      "    int max_val = *std::max_element(arr.begin(), arr.end());",
+      "    std::vector<int> count(max_val + 1, 0);",
+      "    for (int x : arr) count[x]++;",
+      "    int index = 0;",
+      "    for (int i = 0; i <= max_val; i++) {",
+      "        for (int j = 0; j < count[i]; j++) {",
+      "            arr[index++] = i;",
+      "        }",
+      "    }",
+      "}"
+    ],
+    "description": "Сортировка подсчетом (Counting Sort)"
+  }
+}
