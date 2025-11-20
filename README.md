@@ -1,4 +1,4 @@
-# Algo Templates
+# Algo Templates by Romanov Sergey M3117
 
 **Algo Templates** — это расширение для Visual Studio Code, которое позволяет быстро вставлять в редактор шаблоны кода для популярных алгоритмов.
 
